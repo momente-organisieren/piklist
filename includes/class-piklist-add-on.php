@@ -61,11 +61,11 @@ class Piklist_Add_On
 
       if (file_exists($path))
       {
-        $data = piklist::get_file_data($path, array(
+        $data = piklist::get_file_data(array(
                    'name' => 'Plugin Name'
                   ,'type' => 'Plugin Type'
                   ,'version' => 'Version'
-                ));
+                ),$path);
 
         if ($data['type'] && strtolower($data['type']) == 'piklist')
         {
@@ -142,7 +142,7 @@ class Piklist_Add_On
   {
     if (file_exists($file))
     {      
-      $data = piklist::get_file_data($file, array(
+      $data = piklist::get_file_data(array(
                 'name' => 'Plugin Name'
                 ,'plugin_uri' => 'Plugin URI'
                 ,'version' => 'Version'
@@ -151,7 +151,7 @@ class Piklist_Add_On
                 ,'author_uri' => 'Author URI'
                 ,'text_domain' => 'Text Domain'
                 ,'domain_path' => 'Domain Path'
-              ));
+              ),$file );
               
       $data['plugin'] = $plugin;
       $data['add_on'] = $add_on;

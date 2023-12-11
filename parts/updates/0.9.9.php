@@ -214,23 +214,23 @@ if (!class_exists('Piklist_Update_0_9_9'))
               {
                 if ($folder == 'settings')
                 {
-                  $data = piklist::get_file_data($path . '/parts/' . $folder . '/' . $part, array(
-                            'setting' => 'Setting'
-                          ));
+                  $data = piklist::get_file_data(array(
+	                  'setting' => 'Setting'
+                  ),$path . '/parts/' . $folder . '/' . $part);
 
                   $this->setting = $data['setting'];
                 }
                 elseif ($folder == 'widgets')
                 {
-                  $data = piklist::get_file_data($path . '/parts/' . $folder . '/' . $part, array(
-                            'title' => 'Title'
-                          ));
+                  $data = piklist::get_file_data(array(
+	                  'title' => 'Title'
+                  ),$path . '/parts/' . $folder . '/' . $part );
 
                   if (empty($data['title']))
                   {
-                    $data = piklist::get_file_data($path . '/parts/' . $folder . '/' . str_replace('-form', '', $part), array(
-                              'title' => 'Title'
-                            ));
+                    $data = piklist::get_file_data( array(
+	                    'title' => 'Title'
+                    ),$path . '/parts/' . $folder . '/' . str_replace('-form', '', $part));
                   }
 
                   $this->widget = $add_on . ':' . strtolower($data['title']);
