@@ -19,7 +19,7 @@ Page: piklist
 
     <div class="dependent-on-piklist">
 
-        <h3><?php _e('Currently Powered by Piklist on', 'piklist'); ?> <?php echo get_bloginfo('name');?></h2>
+        <h3><?php _e('Currently Powered by Piklist on', 'piklist'); ?> <?php echo get_bloginfo('name');?></h3>
 
             <?php $dependencies = piklist_admin::$piklist_dependent; ?>
 
