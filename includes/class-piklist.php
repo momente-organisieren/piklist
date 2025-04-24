@@ -156,7 +156,7 @@ class Piklist
   {
     self::add_plugin('piklist', dirname(dirname(__FILE__)));
 
-    self::$version = current(self::get_file_data(self::$add_ons['piklist']['path'] . '/piklist.php', array('version' => 'Version')));
+    self::$version = current(self::get_file_data(array('version' => 'Version'),self::$add_ons['piklist']['path'] . '/piklist.php'));
 
     load_plugin_textdomain('piklist', false, 'piklist/languages/');
 
@@ -646,7 +646,7 @@ class Piklist
         if (self::strtolower($part) != 'index.php' && substr($part, 0, strlen($prefix)) == $prefix && substr($part, strlen($part) - strlen($suffix)) == $suffix)
         {
           $render = $path . '/parts/' . $folder . '/' . $part;
-          $part_data = self::get_file_data($render, $data);
+          $part_data = self::get_file_data( $data,$render);
 
           $_part = array(
             'id' => apply_filters("piklist_part_id-{$folder}", piklist::slug($add_on . ' ' . $part), $add_on, $part, $part_data)
@@ -665,7 +665,7 @@ class Piklist
           if (!empty($part_data['extend']))
           {
             $_part_extend = $_part;
-            $_part_extend['data'] = self::get_file_data($render, $extend_data);
+            $_part_extend['data'] = self::get_file_data($extend_data,$render);
 
             // Convert attributes to the registerd paramaters
             foreach ($extend_data as $attribute => $value)
@@ -802,14 +802,16 @@ class Piklist
     {
       foreach ($parts_added as &$part)
       {
-        $part['data'] = self::get_file_data(null, array_merge(array_fill_keys(array_keys($data), null), $part['data']));
+        $part['data'] = self::get_file_data(array_merge(array_fill_keys(array_keys($data), null), $part['data']), null);
       }
       unset($part);
       self::$processed_parts[$folder]['parts'] = array_merge($parts_added, self::$processed_parts[$folder]['parts']);
     }
 
     // Move extensions to the end of the list
-    uasort(self::$processed_parts[$folder]['parts'], array('piklist', 'sort_by_data_extend'));
+	  uasort(self::$processed_parts[$folder]['parts'], function($a, $b) {
+		  return piklist::sort_by_data_extend($a, $b);
+	  });
     self::$processed_parts[$folder]['parts'] = array_values(self::$processed_parts[$folder]['parts']);
 
     /**
@@ -1025,7 +1027,7 @@ class Piklist
    * @static
    * @since 1.0
    */
-  public static function get_file_data($file = null, $data)
+  public static function get_file_data($data, $file = null, )
   {
     if (!is_null($file))
     {
@@ -2392,7 +2394,9 @@ class Piklist
    */
   public static function sort_by_data_extend($a, $b)
   {
-    return empty($b['data']['extend']);
+	  if(empty($a['data']['extend']) && empty($b['data']['extend'])) return 0;
+	  if(empty($a['data']['extend'])) return -1;
+	  if(empty($b['data']['extend'])) return 1;
   }
 
   /**
