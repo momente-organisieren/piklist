@@ -1,4 +1,4 @@
-=== PIKLIST FORK - Easily Build Fields, Forms, Settings, Widgets and More. ===
+=== PIKLIST - Easily Build Fields, Forms, Settings, Widgets and More. ===
 Contributors: piklist, p51labs, sbruner, jason_the_adams, momente_organisieren
 Tested up to: 4.9
 Requires at least: 4.0
@@ -151,7 +151,7 @@ Thank you for wanting to contribute! It helps everyone out!
 
 == Changelog ==
 
-= 1.8.4 =
+= 1.8.5 =
 Release Date: April 25, 2025
 
 * DEVOPS: add github workflow
