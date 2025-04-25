@@ -151,6 +151,16 @@ Thank you for wanting to contribute! It helps everyone out!
 
 == Changelog ==
 
+= 1.8.1 =
+Release Date: April 25, 2025
+
+* DEVOPS: add github workflow
+
+= 1.8.0 =
+Release Date: April 24, 2025
+
+* 1.8 to indicate php8 compatibility
+
 = 1.0.12 =
 Release Date: December 20, 2021
 
