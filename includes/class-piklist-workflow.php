@@ -214,7 +214,11 @@ class Piklist_Workflow
 
       $url_arguments['post'] = isset($post->ID) ? $post->ID : (isset($_REQUEST['post']) ? (int) $_REQUEST['post'] : null);
 
-      parse_str($_SERVER['QUERY_STRING'], $url_defaults);
+        if (isset($_SERVER['QUERY_STRING'])) {
+            parse_str($_SERVER['QUERY_STRING'], $url_defaults);
+        } else {
+            $url_defaults = array(); // Initialize $url_defaults as an empty array to avoid further warnings
+        }
 
       foreach (array('message', 'paged', 'updated') as $variable)
       {

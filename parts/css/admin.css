@@ -159,7 +159,7 @@
     min-height: 185px;
     position: relative;
     float: left;
-    border-color: 1px solid #e1e1e1;
+    border: 1px solid #e1e1e1;
     padding: 10px;
     margin: 0 15px 15px 0;
     background-color: #f1f1f1;
@@ -190,7 +190,7 @@
   .stuffbox h2 .piklist-title-right,
   .stuffbox h3 .piklist-title-right,
   .postbox h2 .piklist-title-right,
-  .postbox h3 .piklist-title-right, {
+  .postbox h3 .piklist-title-right {
     font-size: 75%;
     font-family: sans-serif;
     font-weight: 600;
@@ -466,7 +466,7 @@
 
     #piklist_shortcodebtns a {
       display: inline-block;
-      cursor: pointer !!important;
+      cursor: pointer !important;
       width: 40px;
       height: 40px;
       font: 400 20px/43px dashicons;
@@ -478,8 +478,8 @@
       color: #aaaaaa;
       outline: 0;
 
-      -moz-transition: color .1s ease-in 0;
-      -webkit-transition: color .1s ease-in 0;
+      -moz-transition: color .1s ease-in;
+      -webkit-transition: color .1s ease-in;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -814,7 +814,7 @@
 
     div.wp-tab-panel.wp-tab-panel-vertical {
       margin: 15px 0 15px 125px;
-      height: none;
+      height: 0;
     }
 
     div.wp-tab-panel-resize {

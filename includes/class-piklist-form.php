@@ -2286,27 +2286,52 @@ class Piklist_Form
    * @static
    * @since 1.0
    */
-  public static function update_fields_data($fields_data, $field, $field_name = null, $attribute, $value, $merge = false)
-  {
-    if ((!$field['scope'] && isset($fields_data[0])) || ($field['scope'] && array_key_exists($field['scope'], $fields_data)))
+    public static function update_fields_data($fields_data, $field, $field_name = null, $attribute, $value, $merge = false)
     {
-      if (!is_null($field_name))
-      {
-        $field['field'] = $field_name;
-      }
-
-      foreach ($fields_data[$field['scope']] as &$field_rendered)
-      {
-        if ($field_rendered['field'] == $field['field'] && self::is_related_field($field_rendered) == self::is_related_field($field))
-        {
-          $field_rendered[$attribute] = is_array($value) && $merge ? array_merge($field_rendered[$attribute], $value) : $value;
+        if (!is_array($fields_data) || !is_array($field)) {
+            return $fields_data;
         }
-      }
-      unset($field_rendered);
-    }
 
-    return $fields_data;
-  }
+        $scope = isset($field['scope']) ? $field['scope'] : null;
+        $field_key = !is_null($field_name) ? $field_name : (isset($field['field']) ? $field['field'] : null);
+
+        if ($field_key === null) {
+            return $fields_data;
+        }
+
+        // Determine if we should process the data
+        $should_process = ($scope === null && isset($fields_data[0])) ||
+            ($scope !== null && array_key_exists($scope, $fields_data));
+
+        if (!$should_process) {
+            return $fields_data;
+        }
+
+        $target_data = &$fields_data[$scope ?? 0];
+
+        if (!is_array($target_data)) {
+            return $fields_data;
+        }
+
+        foreach ($target_data as &$field_rendered) {
+            if (!is_array($field_rendered) || !isset($field_rendered['field'])) {
+                continue;
+            }
+
+            if ($field_rendered['field'] === $field_key &&
+                self::is_related_field($field_rendered) === self::is_related_field($field)) {
+
+                if ($merge && is_array($value) && isset($field_rendered[$attribute]) && is_array($field_rendered[$attribute])) {
+                    $field_rendered[$attribute] = array_merge($field_rendered[$attribute], $value);
+                } else {
+                    $field_rendered[$attribute] = $value;
+                }
+            }
+        }
+        unset($field_rendered);
+
+        return $fields_data;
+    }
 
   /**
    * get_fields_data
@@ -2842,15 +2867,15 @@ class Piklist_Form
 
     unset($column);
 
-    if ($field['field'])
-    {
-      if (empty($field['value']))
-      {
-        $cardinality = 1;
-      } else {
-        $cardinality = count($field['value']) > 1 && (!is_array($field['value']) || (is_array($field['value']) && !piklist::is_associative($field['value']))) ? count($field['value']) : 1;
+      if (isset($field['field'])) {
+          $cardinality = 1;
+
+          if (!empty($field['value']) && is_array($field['value'])) {
+              if (count($field['value']) > 1 && !piklist::is_associative($field['value'])) {
+                  $cardinality = count($field['value']);
+              }
+          }
       }
-    }
 
     $field_rendering = self::$field_rendering;
 

@@ -1,9 +1,9 @@
-=== PIKLIST - Easily Build Fields, Forms, Settings, Widgets and More. ===
-Contributors: piklist, p51labs, sbruner, jason_the_adams
+=== PIKLIST FORK - Easily Build Fields, Forms, Settings, Widgets and More. ===
+Contributors: piklist, p51labs, sbruner, jason_the_adams, momente_organisieren
 Tested up to: 4.9
 Requires at least: 4.0
-Stable tag: 1.0.12
-Requires PHP: 5.3
+Stable tag: 1.8.0
+Requires PHP: 7.4
 Tags: custom field, custom fields, forms, framework, flexible, content, meta boxes, post types, repeater, advanced
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
@@ -150,6 +150,16 @@ Thank you for wanting to contribute! It helps everyone out!
 4. Ask questions on our <a href="https://piklist.com/support/">Support Forum</a>. (We love hearing from our users)
 
 == Changelog ==
+
+= 1.8.1 =
+Release Date: April 25, 2025
+
+* DEVOPS: add github workflow
+
+= 1.8.0 =
+Release Date: April 24, 2025
+
+* 1.8 to indicate php8 compatibility
 
 = 1.0.12 =
 Release Date: December 20, 2021
