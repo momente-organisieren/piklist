@@ -1,8 +1,8 @@
-=== PIKLIST - Easily Build Fields, Forms, Settings, Widgets and More. ===
+=== PIKLIST FORK - Easily Build Fields, Forms, Settings, Widgets and More. ===
 Contributors: piklist, p51labs, sbruner, jason_the_adams, momente_organisieren
 Tested up to: 4.9
 Requires at least: 4.0
-Stable tag: 1.1.0
+Stable tag: 1.8.0
 Requires PHP: 7.4
 Tags: custom field, custom fields, forms, framework, flexible, content, meta boxes, post types, repeater, advanced
 Donate link: http://piklist.com/get-involved/
