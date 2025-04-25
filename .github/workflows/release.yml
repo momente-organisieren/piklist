@@ -19,12 +19,23 @@ jobs:
         with:
           fetch-depth: 0 # Vollständige Git-Historie für bessere Release-Informationen
 
-      # Repository in ZIP-Datei archivieren
-      - name: ZIP-Datei erstellen
+      # Repository in ZIP-Datei mit piklist-Ordner archivieren
+      - name: ZIP-Datei mit piklist-Ordner erstellen
         run: |
-          zip -r piklist.zip . -x "*.git*" # Git-Dateien ausschließen für kleinere Pakete
+          # Temporären piklist-Ordner erstellen
+          mkdir -p /tmp/piklist
 
-      # Release erstellen und Asset hochladen (kombiniert in einem Schritt)
+          # Alle Dateien in den piklist-Ordner kopieren (außer .git)
+          rsync -av --exclude=".git" --exclude=".github" . /tmp/piklist/
+
+          # In das temporäre Verzeichnis wechseln und ZIP erstellen
+          cd /tmp
+          zip -r piklist.zip piklist
+
+          # ZIP zurück ins Arbeitsverzeichnis kopieren
+          cp piklist.zip $GITHUB_WORKSPACE/
+
+      # Release erstellen und Asset hochladen
       - name: Release erstellen und Asset hochladen
         uses: softprops/action-gh-release@v2
         with:
@@ -32,7 +43,7 @@ jobs:
           body: |
             ## Release ${{ github.ref_name }}
 
-            Dieses Release enthält das gepackte Repository.
+            Dieses Release enthält das Plugin in einem "piklist"-Ordner.
 
             **Erstellungsdatum:** ${{ github.event.repository.updated_at }}
           files: |
@@ -40,4 +51,4 @@ jobs:
           draft: false
           prerelease: false
           fail_on_unmatched_files: true
-          generate_release_notes: true # Automatische Release Notes aus Commits generieren
+          generate_release_notes: true
