@@ -2,7 +2,7 @@
 Contributors: piklist, p51labs, sbruner, jason_the_adams, momente_organisieren
 Tested up to: 4.9
 Requires at least: 4.0
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 Requires PHP: 7.4
 Tags: custom field, custom fields, forms, framework, flexible, content, meta boxes, post types, repeater, advanced
 Donate link: http://piklist.com/get-involved/
@@ -151,7 +151,7 @@ Thank you for wanting to contribute! It helps everyone out!
 
 == Changelog ==
 
-= 1.8.2 =
+= 1.8.3 =
 Release Date: April 25, 2025
 
 * DEVOPS: add github workflow
